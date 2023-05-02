@@ -14,7 +14,9 @@ public class ClientePF extends Cliente{
 	public ClientePF(String nome, String endereco, List<Veiculo> listaVeiculos, String cpf, String genero,
 			LocalDate dataLicenca, String educacao, LocalDate dataNascimento, String classeEconomica) {
 		super(nome, endereco, listaVeiculos);
-		this.cpf = cpf;
+		String regex  = "\\D";
+		String numerosCpf = cpf.replaceAll(regex, "");
+		this.cpf = numerosCpf;
 		this.genero = genero;
 		this.dataLicenca = dataLicenca;
 		this.educacao = educacao;
@@ -68,16 +70,18 @@ public class ClientePF extends Cliente{
 		this.classeEconomica = classeEconomica;
 	}
 	
-	// Metodos para validar o cpf de um cliente
+	// METODO PARA VALIDAR O CPF DE UM CLIENTE
 	
-	public boolean validarCPF() {
+	public static boolean validarCPF(String cpfDigitado) {
 		// Remove os caracteres nao numericos do CPF
 		String regex  = "\\D";
-		String numerosCpf = cpf.replaceAll(regex, "");
+		String numerosCpf = cpfDigitado.replaceAll(regex, "");
 		
 		// Verifica se o CPF tem 11 digitos. Se nao tiver retorna false
-		if (numerosCpf.length() != 11)
+		if (numerosCpf.length() != 11) {
+			System.out.println("CPF invalido");
 			return false;
+		}
 		
 		// Verifica se todos os digitos sao iguais. Se forem, retorna false
 
@@ -90,6 +94,7 @@ public class ClientePF extends Cliente{
 			}	
 		}
 		if (todosDigitosIguais == true) {
+			System.out.println("CPF invalido");
 			return false;
 		}
 		// Calcula o primeiro digito verificador do cpf
@@ -131,6 +136,7 @@ public class ClientePF extends Cliente{
 			return true;
 		}
 		else {
+			System.out.println("CPF invalido");
 			return false;
 		}
 	}

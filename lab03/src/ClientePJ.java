@@ -9,7 +9,9 @@ public class ClientePJ extends Cliente{
 	
 	public ClientePJ(String nome, String endereco, List<Veiculo> listaVeiculos, String cnpj, LocalDate dataFundacao) {
 		super(nome, endereco, listaVeiculos);
-		this.cnpj = cnpj;
+		String regex  = "\\D";
+		String numerosCnpj = cnpj.replaceAll(regex, "");
+		this.cnpj = numerosCnpj;
 		this.dataFundacao = dataFundacao;
 	}
 	
@@ -29,15 +31,17 @@ public class ClientePJ extends Cliente{
 	
 	// Metodos para validar o cnpj de um cliente
 	
-	public boolean validarCnpj()
+	public static boolean validarCnpj(String cnpj)
 	{
 		// Remove os caracteres nao numericos do Cnpj
 		String regex  = "\\D";
 		String numerosCnpj = cnpj.replaceAll(regex, "");
 		
 		// Verifica se o Cnpj tem 14 digitos. Se nao tiver retorna false
-		if (numerosCnpj.length() != 14)
+		if (numerosCnpj.length() != 14) {
+			System.out.println("CNPJ invalido1");
 			return false;
+		}	
 		
 		// Verifica se todos os digitos sao iguais. Se forem, retorna false
 		
@@ -50,6 +54,7 @@ public class ClientePJ extends Cliente{
 			}	
 		}
 		if (todosDigitosIguais == true) {
+			System.out.println("CNPJ invalido2");
 			return false;
 		}
 
@@ -86,10 +91,12 @@ public class ClientePJ extends Cliente{
 		
 		// Verifica se os digitos verificadores sao iguais aos digitos verificadores do cnpj
 			
-		if ((primeiroVerificador == (numerosCnpj.charAt(9) - 48)) && (segundoVerificador == (numerosCnpj.charAt(10) - 48))) 
+		if ((primeiroVerificador == (numerosCnpj.charAt(12) - 48)) && (segundoVerificador == (numerosCnpj.charAt(13) - 48))) 
 			return true;
-		else
+		else {
+			System.out.println("CNPJ invalido");
 			return false;
+		}	
 	}
 
 	// toString

@@ -11,8 +11,8 @@ public class Sinistro {
 	
 	// Construtor
 	
-	public Sinistro(int id, String data, String endereco, Seguradora seguradora, Veiculo veiculo, Cliente cliente) {
-		this.id = id;
+	public Sinistro(String data, String endereco, Seguradora seguradora, Veiculo veiculo, Cliente cliente) {
+		this.id = geraID();
 		this.data = data;
 		this.endereco = endereco;
 		this.seguradora = seguradora;
@@ -69,9 +69,9 @@ public class Sinistro {
 		}
 	}
 
-	@Override
+	//@Override
 	public String toString() {
-		return "Sinistro [id=" + id + ", data=" + data + ", endereco=" + endereco + ", seguradora=" + seguradora
+		return "Sinistro [id=" + id + ", data=" + data + ", endereco=" + endereco + ", seguradora=" + seguradora.getNome()
 				+ ", veiculo=" + veiculo + ", cliente=" + cliente + "]";
 	}
 	

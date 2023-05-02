@@ -51,7 +51,20 @@ public class Veiculo {
 				+ anoFabricacao + "]";
 	}
 	
-	
+	@Override
+	public boolean equals(Object obj) {
+		boolean retorno = false;
+		if ((obj != null) && (obj instanceof Veiculo)) {
+			Veiculo a = (Veiculo) obj;
+			if(this.placa == a.placa) {
+				retorno = true;
+			}
+		}
+		
+		
+		
+		return retorno;
+	}
 	
 
 	
